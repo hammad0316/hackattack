@@ -7,7 +7,7 @@ var env = process.env.NODE_ENV || 'dev';
 var dbURI = (env == 'dev')? 'mongodb://localhost/hackathon-project' : process.env.MONGODB_URI;
 
 // Create the database connection
-mongoose.connect(dbURI);
+mongoose.createConnection(dbURI);
 
 // CONNECTION EVENTS
 // When successfully connected
