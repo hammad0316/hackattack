@@ -35,7 +35,7 @@ process.on('SIGINT', function() {
 
 
 // BRING IN YOUR SCHEMAS & MODELS
-require('./event');
-require('./child');
-require('./user');
-require('./attendance');
+require('./host');
+// require('./child');
+// require('./user');
+// require('./attendance');
