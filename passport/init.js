@@ -13,13 +13,14 @@ module.exports = function(passport){
 
 	// Passport needs to be able to serialize and deserialize host uses to support persistent login sessions
     passport.serializeUser(function(host, done) {
-        console.log('serializing user: ');
+        console.log('serializing user: ', host);
+
         done(null, host._id);
     });
 
     passport.deserializeUser(function(id, done) {
         Host.findById(id, function(err, host) {
-            console.log('deserializing host:');
+            console.log('deserializing host:', host);
             done(err, host);
         });
     });
