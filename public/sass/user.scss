@@ -1,0 +1,171 @@
+$royal-blue: #4062bb;
+$light-blue: #27aae3;
+$light-gray: #e6e6e6;
+$dark-gray: #3f3f3f;
+$orange: #dc493b;
+$white: #ffffff;
+$danger-red: #cc0000;
+$success-green: #4BB543;;
+/*show page*/
+.links_container{
+  width: 90%;
+  margin:0 auto;
+  display: block;
+  /*padding-bottom: 10px;*/
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+#event-register, #open-gym-register{
+  width:50%;
+  padding:0;
+  margin:0;
+  display: inline-block;
+  text-align: center;
+  float:left;
+}
+#event-register a, #open-gym-register a{
+  background-color: $light-blue!important;
+  color: white!important;
+  width: 80%;
+  padding: 8px 10px;
+  display:inline-block;
+  margin:0 auto;
+  font-size: 17px;
+  border-radius: 5px;
+}
+.user_container{
+  clear:both;
+  display: block;
+  width: 50%;
+  margin: 25px;
+}
+.username-header{
+  margin-top: 40px;
+}
+.user_page_header{
+  text-decoration: underline;
+  text-align: center;
+}
+.need-to-update-account{
+  font-size: 28px;
+  color: #cc0000;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+.profile-page-container{
+  min-height: 100vh;
+  height: auto;
+  display: flex;
+  align-items: stretch;
+  // overflow: hidden;
+  .profile-sidebar{
+    &.archived{
+      background-color: $danger-red;
+    }
+    width: 30%;
+    background-color: $royal-blue;
+    color: $light-gray;
+    padding: 15px;
+    display: inline-block;
+
+    img{
+      width: 80%;
+      height: auto;
+      margin: 5px auto;
+      display: block;
+    }
+    .profile-picture-form-container{
+      margin: 10px auto;
+      border: 2px solid $white;
+      padding: 10px 5px;
+
+      .label-and-filename{
+        white-space:nowrap;
+        margin-bottom: 5px;
+        label{
+          font-size: 18px;
+          font-weight: 600;
+        }
+        #fileName{
+          font-size: 15px;
+          text-overflow: ellipsis;
+          font-style: italic;
+        }
+      }
+      .submit-profile-picture{
+        display: block;
+        background: $white;
+        outline: none;
+        border: 1px solid $white;
+        color: $royal-blue;
+        padding: 5px 8px;
+        border-radius: 5px;
+        margin: 0 auto;
+        font-weight: 900;
+      }
+    }
+    .sidebar-info-container{
+      margin: 5px 0px;
+      span{
+        font-size: 18px;
+      }
+      .info{
+        font-weight: 500;
+      }
+    }
+    .edit-user-button{
+      font-size: 28px;
+      text-align: center;
+      display: block;
+      margin-top: 10px;
+      color: $light-gray;
+      .fa-pencil-alt{
+            font-size: 0.8em;
+      }
+    }
+  }
+  .profile-content{
+    width: 70%;
+    padding: 15px;
+    background-color: $light-gray;
+    display: inline-block;
+    .profile-welcome-container{
+      p{
+        font-size: 15px;
+        width: 90%;
+        margin: 0 auto;
+      }
+    }
+    .profile-content-container{
+      width: 100%;
+      margin-bottom: 20px;
+          overflow: auto;
+    }
+    .registered-child-container{
+      margin-bottom: 25px;
+      border-bottom: 1px solid $royal-blue;
+      padding-bottom: 10px;
+      span{
+        font-size: 22px;
+      }
+      .info{
+        font-weight: 500;
+      }
+
+    }
+    .edit-child-info-button{
+      font-size: 22px;
+      font-weight: 900;
+      color: $orange;
+      .fa-pencil-alt{
+            font-size: 0.8em;
+      }
+    }
+  }
+}
+
+
+/*index page*/

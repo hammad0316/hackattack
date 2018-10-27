@@ -1,0 +1,140 @@
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Event</title>
+    <link rel="stylesheet" href="/stylesheets/simple-grid.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/user.css">
+    <link rel="stylesheet" href="/stylesheets/fontawesome.min.css">
+  </head>
+  <body>
+    <% include ../layouts/header %>
+    <% include ../layouts/message %>
+<div class="main-container no-margin-top no-padding-bottom">
+
+
+        <div class="profile-page-container is-fullwidth">
+          <div class="profile-sidebar <%= user.archived? 'archived' : ''%>">
+            <%if(user.archived){ %>
+              <h2 class=" is-centerd-text">(ARCHIVED)</h2>
+              <%} %>
+              <h2 class="user_page_header"><%= user.full_name() %>'s Info</h2>
+              <img src="<%= user.profile_url %>" alt="">
+              <div class="profile-picture-form-container">
+                <form action="/users/upload_photo" method="POST" enctype="multipart/form-data" class="profile-picture-form">
+                  <input type="hidden" name="id" value="<%= user._id %>">
+                  <input type="hidden" name="profile_pic" value=true>
+                  <div class="label-and-filename">
+                    <label for="user_photo"><i class="fas fa-upload"></i> Choose Profile Picture</label>
+                    <input type="file" class="file-input" name="user_photo" accept="image/*" value="Choose Profile Picture" id="user_photo" onchange="getFileName()" style="display:none">
+                    <span id="fileName"></span>
+                  </div>
+                  <input type="submit" class="submit-profile-picture" value="Submit Profile Pciture">
+                </form>
+              </div>
+              <div class="sidebar-info-container">
+                <span class="is-bold">Email: </span>
+                <span class="info"><%= user.email %></span>
+              </div>
+              <div class="sidebar-info-container">
+                <span class="is-bold">Address: </span>
+                <span class="info"><%= user.full_address() %></span>
+              </div>
+              <div class="sidebar-info-container">
+                <span class="is-bold">Phone: </span>
+                <span class="info"><%= user.phone_number %></span>
+              </div>
+
+              <%  if(current_user.is_admin()){ %>
+                  <div class="sidebar-info-container">
+                    <span class="is-bold">Signed Up:</span>
+                    <% var dateString = "MMM D, YYYY" %>
+                    <span class="info"><%=formatDate(user.created_at, [format=dateString]) %></span>
+                  </div>
+                  <div class="sidebar-info-container">
+                    <span class="is-bold">Info For Admin:</span>
+                    <span class="info"><a href="/admin/users/<%= user._id %>" target="_blank">info</a></span>
+                  </div>
+
+              <% } %>
+
+            <a class="edit-user-button is-bold" href="/users/<%=user._id%>/edit"><span>Edit</span> <i class="fas fa-pencil-alt"></i></a>
+
+            <% if(current_user.is_super_admin()) { %>
+
+            <h1><a href="/users/delete/<%=user._id %>">Delete</a></h1>
+
+            <% } %>
+
+          </div>
+          <div class="profile-content">
+            <% if (user.email == current_user.email && user.status === "parent"){  %>
+
+            <div class="profile-welcome-container">
+              <h2>Hello, <%= user.firstname %>!</h2>
+              <p >This is your Pofile Page! You have registered yourself as an Open Gym Parent. This means you can register your children for our Open Gymp Program or register your family for Maspeth Bible Church Events. On this page you will see your basic info, your registered childrens' information, events you have registerd for, as well as buttons to register your children and register for an event. If you have any questions, please email: tylergaugler16@gmail.com </span>
+            </p>
+
+            <div class="links_container profile-content-container">
+              <div id="open-gym-register">
+                <% if(children.length > 0) {  %>
+                  <a href="/open_gym/register" class="avenir-900">Register your children for Open Gym</a>
+                <% } else{  %>
+                  <a href="/open_gym/register" class="avenir-900">Register more children for Open Gym</a>
+                  <% } %>
+
+              </div>
+              <div id="event-register">
+                <a href="/events" class="avenir-900">Register for Upcoming Event</a>
+              </div>
+
+            </div>
+            <% } else if(user.email == current_user.email && user.status === "staff"){  %>
+              <h2>Hello, <%= user.firstname %>!</h2>
+              <p >This is your Pofile Page! You have registered yourself as an Open Gym Staff member. This means you can sign in at the front desk along with the kids to ensure that your service hour credits will be tracked.  </span>
+            </p>
+            <% } else if(current_user.is_admin){ %>
+              <% if(user.needsToBeUpdatedForFall()){  %>
+                    <h1 class="need-to-update-account">NEED TO UPDATE ACCOUNT FOR FALL</h1>
+              <%  } %>
+              <div class="profile-content-container">
+              <div id="open-gym-register" >
+                <a href="/open_gym/register?parent_id=<%= user._id %>" class="avenir-900">Register <%= user.full_name() %>  children for Open Gym</a>
+              </div>
+            </div>
+            <% }  %>
+
+
+
+            <% if(user.status === "parent" || current_user.is_admin()){  %>
+              <% include ./clientProfile/_clientProfileChildrenContainer.ejs %>
+            <% } %>
+
+
+              <div id="event_container" class="profile-content-container">
+                <h2 class="user_page_header">Events Registered For</h2>
+                <% if(registered_events.length === 0){ %>
+                  <h4 class="is-italic">No events registered for</h4>
+                  <% } %>
+                <% for(var i =0;i<registered_events.length;i++){ %>
+                  <h4><%= registered_events[i].title %></h4>
+                <% } %>
+              </div>
+          </div>
+        </div>
+
+
+<script type="text/javascript">
+function getFileName(){
+  var x = document.getElementsByClassName('file-input')[0];
+  x.style.visibility = 'collapse';
+  document.getElementById('fileName').innerHTML = x.value.split('\\').pop();
+}
+</script>
+
+
+    </div>
+  </body>
+
+</html>

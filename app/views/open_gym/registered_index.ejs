@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Open Gym Registration</title>
+    <link rel="stylesheet" href="/stylesheets/simple-grid.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/open_gym.css">
+    <link rel="stylesheet" href="/stylesheets/fontawesome.min.css">
+
+
+    <script src="/js/jquery-3.1.1.min.js" charset="utf-8"></script>
+    <script src="/js/open_gym.js" charset="utf-8"></script>
+
+  </head>
+  <body>
+    <% include ../layouts/header %>
+    <% include ../layouts/message %>
+
+    <div class="main-container registered-index-page">
+      <div class="table-header-container">
+
+          <h1 class="is-underline">Children Registered for Open Gym</h1>
+
+        <div class="search-sort-container">
+
+          <div>
+            <label for="sort-user" class="is-bold">Sort:</label>
+            <select name="sort-user" id="sort-users">
+              <option value="lastnameAsc">Lastname ↑(z-a)</option>
+
+              <option value="lastnameDesc">Lastname ↓(a-z)</option>
+              <option value="firstnameAsc">Firstname ↑(z-a)</option>
+              <option value="firstnameDesc">Firstname ↓(a-z) </option>
+              <option value="createdAtDesc">Sign Up Date ↓(earliest-latest) </option>
+              <option value="createdAtAsc">Sign Up Date ↑(latest-earliest) </option>
+            </select>
+          </div>
+
+          <div>
+            <label for="search-users" class="is-bold">Search:</label>
+            <input type="text" name="search-users" id="search-users">
+          </div>
+          <div>
+            <button class="search-users-button">Search</button>
+          </div>
+
+        </div>
+        <div class="filter-container">
+          <div>
+            <span class="show-filters-button"> Advanced Filtering <i class="fas fa-filter"></i></span>
+
+          </div>
+          <div class="all-filter-options-container">
+            <div class="all-filter-options">
+
+                  <div class="filter-option">
+                    <h4>Signed Up in the last:</h4>
+                    <input type="radio" name="signed_up_after" value="7"><span>1 Week</span><br>
+                    <input type="radio" name="signed_up_after" value="30"><span>1 Month</span> <br>
+                    <input type="radio" name="signed_up_after" value="90"><span>3 Months</span>  <br>
+                    <input type="radio" name="signed_up_after" value="180"><span>6 Months </span><br>
+                  </div>
+                  <div class="filter-option">
+                    <h4>Has Medical Notes:</h4>
+                    <input type="radio" name="medical_notes" value="true"><span>Yes</span><br>
+                    <input type="radio" name="medical_notes" value="false"><span>No</span> <br>
+                  </div>
+                  <div class="filter-option">
+                    <h4>Is Archived:</h4>
+                    <input type="radio" name="archived" value="true"><span>Yes</span><br>
+                    <input type="radio" name="archived" value="false"><span>No</span> <br>
+                  </div>
+
+                  <!-- filter options: status(staff, parent, admin), if they have profile picture -->
+            </div>
+            <div class="clear-filters-container">
+
+                <span class="clear-filters-button" id="clear-filters">Clear Filters</span>
+                <span class="apply-filters-button search-users-button">Apply Filters</span>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <table class="users-table">
+        <thead>
+          <th>Child Name</th>
+          <th>Parent Name</th>
+          <th>Emergency Contact Name</th>
+          <th>Emergency Contact Number</th>
+          <th>Address</th>
+          <th>Medical Notes</th>
+        </thead>
+        <tbody>
+          <% for(var i=0;i < children.length;i++){ %>
+            <tr class="<%= children[i].archived? 'is-archived' : '' %>">
+              <td><%= children[i].full_name() %> <%= children[i].archived? ' (ARCHIVED)' : '' %></td>
+              <td><a href="/users/<%= children[i].legal_guardian_id[0] %>"><%= parent_hash[children[i].legal_guardian_id[0]]%> <i class="fas fa-link"></i></a></td>
+              <td><%= children[i].emergency_contact_name %></td>
+              <td><%= children[i].emergency_contact_phone%></td>
+              <td><%= children[i].address %></td>
+              <td><%= children[i].medical_notes %></td>
+            </tr>
+
+          <% } %>
+        </tbody>
+      </table>
+
+
+    </div>
+
+
+  </body>
+</html>

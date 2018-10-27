@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Admin Home</title>
+
+    <link rel="stylesheet" href="/stylesheets/simple-grid.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/admin.css">
+    <script src="/js/jquery-3.1.1.min.js" charset="utf-8"></script>
+
+  </head>
+  <body>
+    <% include ../layouts/header %>
+    <% include ../layouts/message %>
+      <div class="main-container">
+        <div id="admin_actions">
+
+            <a href="/admin/spreadsheets">
+              <div class="action"><h3 class="action_headers">Download Registration Spreadsheets</h3></div>
+            </a>
+
+
+            <a href="/admin/weekly_attendance">
+              <div class="action"><h3 class="action_headers">Weekly Attendance Sheets</h3></div>
+            </a>
+            <a href="/users">
+              <div class="action"><h3 class="action_headers">View Parents/Users List</h3></div>
+            </a>
+            <a href="/open_gym/registered/children">
+              <div class="action"><h3 class="action_headers">View List of Children Registerd for Open Gym</h3></div>
+            </a>
+            <!-- <a href="/open_gym/registered/parents">
+              <div class="action"><h3 class="action_headers">View Parents Registerd for Open Gym</h3></div>
+            </a> -->
+            <a href="/events/new">
+              <div class="action"><h3 class="action_headers">Create Event</h3></div>
+            </a>
+            <a href="/events">
+              <div class="action"><h3 class="action_headers">View Events</h3></div>
+            </a>
+            <!-- <a href="#">
+              <div class="action"><h3 class="action_headers">Message Board</h3></div>
+            </a> -->
+
+
+        </div>
+
+      </div>
+
+  </body>
+</html>

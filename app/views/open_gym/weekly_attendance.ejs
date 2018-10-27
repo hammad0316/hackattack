@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Open Gym Registration</title>
+    <link rel="stylesheet" href="/stylesheets/simple-grid.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/DateTimePicker.css">
+    <link rel="stylesheet" href="/stylesheets/open_gym.css">
+
+
+    <script src="/js/jquery-3.1.1.min.js" charset="utf-8"></script>
+    <script src="/js/DateTimePicker.js" charset="utf-8"></script>
+    <script src="/js/open_gym.js" charset="utf-8"></script>
+
+  </head>
+  <body>
+    <% include ../layouts/header %>
+    <% include ../layouts/message %>
+
+    <div class="main-container">
+      <input type="hidden" value="<%= date %>" id="current_date">
+
+      <div id="weekly_attendance_container">
+        <div id="attendance_header">
+          <div class="attendance_header_flexbox">
+            <% var dateString = "MMM D, YYYY" %>
+            <h1><%=formatDate(date, [format=dateString]) %></h1>
+
+          </div>
+          <div class="attendance_header_flexbox">
+            <a href="/open_gym/weekly_attendance/view/<%= date %>"><h3>View Sheet</h3></a>
+          </div>
+
+        </div>
+
+        <form action="#" id="find_name_form">
+          <input type="text" id="search_bar" autocomplete="off" placeholder="search...">
+        </form>
+        <div id="children_container">
+
+        </div>
+      </div>
+    </div>
+
+
+  </body>
+</html>
