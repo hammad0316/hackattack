@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Signup</title>
+    <link rel="stylesheet" href="/stylesheets/">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+  </head>
+  <body >
+    <% include ../layouts/header %>
+    <% include ../layouts/message %>
+    <div class="main-container">
+
+      <div id="signup-container">
+        <h1>Signup!</h1>
+        <form class="" action="/hosts/signup" method="post">
+          <div class="signup-input-container">
+            <label for="firstname">Name</label>
+            <input type="text" name="name" value="" required>
+
+          </div>
+
+          <div class="signup-input-container">
+            <label for="email">Email</label>
+            <input type="text" name="email" value="" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" value="" required>
+          </div>
+          <div class="signup-input-container">
+
+          </div>
+
+          <div class="signup-input-container">
+            <label for="address">Line 1</label>
+            <input type="text" name="location.line1" value="" required>
+            <label for="city">City</label required>
+            <input type="text" name="location.city" value="" required>
+          </div>
+
+
+          <div class="signup-input-container">
+            <input type="submit" name="" value="Create Host Account" id="submit_button">
+          </div>
+        </form>
+      </div>
+
+
+
+
+    </div>
+  </body>
+</html>

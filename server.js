@@ -13,8 +13,8 @@ const path = require('path');
 // const upload = multer({dest: 'public/user_images/'});
 const env = process.env.NODE_ENV || 'dev';
 
-const mongoose = require( 'mongoose' ),
-    User = mongoose.model('User', 'userSchema');
+const mongoose = require( 'mongoose' );
+    // User = mongoose.model('User', 'userSchema');
 app.use(logger('dev'));
 
 app.use(bodyParser.json());

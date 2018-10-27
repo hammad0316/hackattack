@@ -1,4 +1,4 @@
-// const users = require('../controllers/user.js');
+const hosts = require('../controllers/host.js');
 // const events = require('../controllers/event.js');
 const dashboard = require('../controllers/dashboard.js');
 // const open_gym = require('../controllers/open_gym.js');
@@ -31,7 +31,13 @@ module.exports = function(passport, upload){
 
   // Router.route('/users/fix_all').get(admin.fixAll);
 
+  Router.route('/hosts/signup').get(isNotLoggedIn, hosts.signup);
+  Router.route('/hosts/signup').post(isNotLoggedIn, hosts.create);
 
+  Router.route('/hosts/login').get(isNotLoggedIn, hosts.login);
+  Router.route('/hosts/login').post(isNotLoggedIn, passport.authenticate('login',{failureRedirect: '/hosts/login', failureFlash : true}), hosts.signin);
+
+  Router.route('/hosts/logout').get(hosts.logout);
 
   Router.route('/').get(dashboard.home);
   // add wildcard Route to page_not_found

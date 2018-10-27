@@ -1,19 +1,26 @@
 var login = require('./login');
-var mongoose = require( 'mongoose' ),
-    User = mongoose.model('User', 'userSchema');
+const mongoose = require( 'mongoose' );
+//     Host = mongoose.model('Host', 'hostSchema');
+
+const env = process.env.NODE_ENV || 'dev';
+const dbURI = (env == 'dev')? "mongodb://127.0.0.1:27017/hackathon-project" : process.env.MONGODB_URI;
+
+// Create the database connection
+const connection = mongoose.createConnection(dbURI);
+const Host = connection.model('Host', 'hostSchema');
 
 module.exports = function(passport){
 
-	// Passport needs to be able to serialize and deserialize users to support persistent login sessions
-    passport.serializeUser(function(user, done) {
-        console.log('serializing user: ');console.log("");
-        done(null, user._id);
+	// Passport needs to be able to serialize and deserialize host uses to support persistent login sessions
+    passport.serializeUser(function(host, done) {
+        console.log('serializing user: ');
+        done(null, host._id);
     });
 
     passport.deserializeUser(function(id, done) {
-        User.findById(id, function(err, user) {
-            console.log('deserializing user:');
-            done(err, user);
+        Host.findById(id, function(err, host) {
+            console.log('deserializing host:');
+            done(err, host);
         });
     });
 
