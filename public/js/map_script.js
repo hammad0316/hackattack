@@ -11,7 +11,22 @@ window.onload = function() {
     );
     map.panTo(center);
     map.setZoom(16);
+    getHosts(position);
   };
   navigator.geolocation.getCurrentPosition(geoSuccess);
 };
-sssssssssssssssssssssssssssssssssssssssss;
+
+var getHosts = function(position) {
+  $.ajax({
+    url: "map/test",
+    method: "GET",
+    data: {
+      name: "blank"
+    },
+    success: function(data) {
+      // console.log(data.length);
+      // console.log(data.children.length);
+      console.log(data);
+    }
+  });
+};

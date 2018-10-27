@@ -50,6 +50,8 @@ module.exports = function(passport, upload) {
 
   Router.route("/map").get(map.home);
 
+  Router.route("/map/test").get(map.test);
+
   return Router;
 };
 
