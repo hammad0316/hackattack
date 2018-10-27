@@ -37,7 +37,6 @@ var hostSchema = new Schema({
 
 // on every save, add the date
 hostSchema.pre('save', true, function(next, done) {
-
   var host = this;
   console.log(host);
   var currentDate = new Date();
