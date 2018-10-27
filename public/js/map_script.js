@@ -10,6 +10,8 @@ window.onload = function() {
       position.coords.longitude
     );
     map.panTo(center);
+    map.setZoom(16);
   };
   navigator.geolocation.getCurrentPosition(geoSuccess);
 };
+sssssssssssssssssssssssssssssssssssssssss;
