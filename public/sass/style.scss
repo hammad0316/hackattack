@@ -661,3 +661,30 @@ body {
   height: auto;
   padding: 50px 12.5%;
 }
+
+.signup-container{
+    text-align: center;
+    margin-top: 10%;
+}
+
+.signup-choose {
+    width: 25%;
+    height: 300px;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+    border: solid 1px #eaf0fb;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    display: inline-block;
+}
+.signup-choose p {
+    margin-top: 60px;
+}
+.signup-choose .start-now {
+    margin-top: 60px;
+}
+.signup-choose h1 {
+    margin-top: 15px;
+}

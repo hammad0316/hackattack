@@ -34,6 +34,8 @@ module.exports = function(passport, upload) {
   Router.route("/hosts/signup").get(isNotLoggedIn, hosts.signup);
   Router.route("/hosts/signup").post(isNotLoggedIn, hosts.create);
 
+  Router.route("/signup/choose").get(isNotLoggedIn, dashboard.choose);
+
   Router.route("/hosts/login").get(isNotLoggedIn, hosts.login);
   Router.route("/hosts/login").post(
     isNotLoggedIn,
