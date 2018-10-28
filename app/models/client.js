@@ -14,6 +14,7 @@ const Schema = mongoose.Schema;
 var clientSchema = new Schema({
   name: { type: String, required: true, unique: false },
   email: { type: String, required: true, unique: true },
+  user_type: {type: String, required: true, default: "client"},
   geo_location: {
     type: { type: String },
     coordinates: [Number],
@@ -46,27 +47,22 @@ clientSchema.pre('save', true, function(next, done) {
 
   }
 
-
-  // var phone_regex =/((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/
-  // if(!phone_regex.test(this.phone_number)){
-  //   var err = new Error('Incorrect Phone Number');
-  //   next(err);
-  // };
-
 // only hash password if it has been modified.
 // since done() is called here, make sure only the bycrpt hash is below this
-  if (!this.isModified('password')) done();
-    // hash the password along with our new salt
-
-    bcrypt.hash(client.password, salt, function(err, hash) {
-      console.log(err);
-      console.log(hash);
-        if (err) return next(err);
-
-        client.password = hash;
-        next();
-    });
-    done();
+next();
+done();
+  // if (!this.isModified('password')) done();
+  //   // hash the password along with our new salt
+  //
+  //   bcrypt.hash(client.password, salt, function(err, hash) {
+  //     console.log(err);
+  //     console.log(hash);
+  //       if (err) return next(err);
+  //
+  //       client.password = hash;
+  //       next();
+  //   });
+  //   done();
 });
 
 
