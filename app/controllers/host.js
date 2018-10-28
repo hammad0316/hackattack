@@ -25,6 +25,7 @@ exports.login = function(req, res){
 
 exports.signin = function(req, res){
   // req.flash('message', 'You are logged in!');
+
   res.redirect('/hosts/'+req.host._id);
 }
 
