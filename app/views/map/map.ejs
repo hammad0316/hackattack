@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="/stylesheets/simple-grid.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
     <style>
       /* Set the size of the div element that contains the map */
       #map {
@@ -14,11 +16,27 @@
 <script src="/js/jquery-3.1.1.min.js" charset="utf-8"></script>
   </head>
   <body>
+    <% if(current_user){  %>
+      <input type="hidden" name="current_user_id" value="<%= current_user._id %>" id="current_user_id">
+      <input type="hidden" name="current_user_type" value="<%= current_user.user_type %>" id="current_user_type">
+    <% }%>
+
     <h3>My Google Maps Demo</h3>
     <p id="startLat"></p>
     <p id="startLon"></p>
     <!--The div element for the map -->
     <div id="map"></div>
+    <div id="overlay" style="display:none"></div>
+    <div id="modal" style="display:none">
+      <div class="modal-content">
+        <form class="" action="/reservation/create" method="post">
+          <h1>Would you like to Book an appointment with: <span id="host_name"></span></h1>
+          <input type="hidden" name="client_id" id="client_id">
+          <input type="hidden" name="host_id" id="host_id">
+          <input type="submit" value="Reserve">
+        </form>
+      </div>
+    </div>
     <script>
 // Initialize and add the map
 function initMap() {
