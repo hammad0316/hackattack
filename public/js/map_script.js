@@ -37,12 +37,28 @@ var getHosts = function(LngLatPair) {
 };
 
 var displayCoords = function(hosts) {
-  for (var host = 0; host < hosts.length; host++) {
-    var coords = hosts[host].geo_location.coordinates;
+  for (var h = 0; h < hosts.length; h++) {
+    var host = hosts[h];
+    var coords = host.geo_location.coordinates;
     var latLng = new google.maps.LatLng(coords[1], coords[0]);
     var marker = new google.maps.Marker({
       position: latLng,
       map: map
     });
+    marker.addListener("click", function() {
+      var contentString =
+        '<div id="content">' +
+        '<div id="hostName">' +
+        `<a href="localhost:3000/host?id=1">${host.name}</a>` +
+        "</div>" +
+        "</div>";
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+      infowindow.open(map, marker);
+    });
   }
 };
+
+var showInfo = function(marker, host) {};
