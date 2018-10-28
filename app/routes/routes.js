@@ -52,6 +52,8 @@ module.exports = function(passport, upload) {
   Router.route("/map/find_hosts").get(map.find_hosts);
 
 
+  Router.route("/map/test").get(map.test);
+
   return Router;
 };
 
