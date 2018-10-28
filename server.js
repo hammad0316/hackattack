@@ -66,7 +66,7 @@ app.use(function(req, res, next){
 app.locals.formatDate = dateFns.format;
 
 //init SEEDS!!
-// seedDB();
+seedDB();
 
 const initPassport = require('./passport/init');
 initPassport(passport);
