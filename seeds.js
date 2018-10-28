@@ -21,7 +21,7 @@ var hostData = [
 		},
 		geo_location: {
 			type: "Point",
-			coordinates: [40.7397291, -73.8174079],
+			coordinates: [ -73.8174079, 40.7397291],
 		},
 		password: "safekeep",
 		resetPasswordToken: "true",
@@ -44,7 +44,7 @@ var hostData = [
 		},
 		geo_location: {
 			type: "Point",
-			coordinates: [40.7390544, -73.8157986],
+			coordinates: [ -73.8157986, 40.7390544],
 		},
 		password: "safekeep",
 		resetPasswordToken: "true",
@@ -67,7 +67,7 @@ var hostData = [
 		},
 		geo_location: {
 			type: "Point",
-			coordinates: [40.7415274, -73.8264233],
+			coordinates: [ -73.8264233, 40.7415274],
 		},
 		password: "safekeep",
 		resetPasswordToken: "true",
@@ -90,7 +90,7 @@ var hostData = [
 		},
 		geo_location: {
 			type: "Point",
-			coordinates: [40.7303168, 73.8149642],
+			coordinates: [ 73.8149642, 40.7303168],
 		},
 		password: "safekeep",
 		resetPasswordToken: "true",
@@ -113,7 +113,7 @@ var hostData = [
 		},
 		geo_location: {
 			type: "Point",
-			coordinates: [40.72914, -73.8154912],
+			coordinates: [ -73.8154912, 40.72914],
 		},
 		password: "safekeep",
 		resetPasswordToken: "true",
@@ -136,7 +136,7 @@ var hostData = [
 		},
 		geo_location: {
 			type: "Point",
-			coordinates: [40.7292824, -73.8157424],
+			coordinates: [ -73.8157424, 40.7292824],
 		},
 		password: "safekeep",
 		resetPasswordToken: "true",
@@ -159,7 +159,7 @@ var hostData = [
 		},
 		geo_location: {
 			type: "Point",
-			coordinates: [40.7321605, -73.8112899],
+			coordinates: [ -73.8112899, 40.7321605],
 		},
 		password: "safekeep",
 		resetPasswordToken: "true",
@@ -182,7 +182,7 @@ var hostData = [
 		},
 		geo_location: {
 			type: "Point",
-			coordinates: [40.7341933, -73.8192293],
+			coordinates: [ -73.8192293, 40.7341933],
 		},
 		password: "safekeep",
 		resetPasswordToken: "true",
