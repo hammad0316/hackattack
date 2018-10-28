@@ -7,9 +7,10 @@
   <div id="header_buttons" class="avenir-900">
     <div class="header-button"><a href="/">Home</a></div>
     <% if (current_user) { %>
-      <% if (current_user.user_type){ %>
+      <% if (current_user.user_type ){ %>
       <div class="header-button"> <span id="current-user"><a href="/hosts/<%= current_user._id %>"><%= current_user.name %></a> </span></div>
       <%}%>
+
         <div class="header-button"> <a href="/hosts/logout">Logout</a></div>
     <% } else{ %>
       <div class="header-button"><a href="/hosts/login">Log in</a></div>
