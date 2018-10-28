@@ -23,6 +23,10 @@ var isAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) return next();
   res.redirect("/");
 };
+var isAuthenticatedAndIsHost = function(req, res, next) {
+  if (req.isAuthenticated() && req.user && req.user.user_type && req.user.user_type == "host") return next();
+  res.redirect("/");
+};
 var isAdmin = function(req, res, next) {
   if (req.isAuthenticated() && req.user.status == "admin") return next();
   res.redirect("/");
@@ -35,7 +39,6 @@ module.exports = function(passport, upload) {
   Router.route("/hosts/signup").get(isNotLoggedIn, hosts.signup);
   Router.route("/hosts/signup").post(isNotLoggedIn, hosts.create);
 
-  Router.route("/signup/choose").get(isNotLoggedIn, dashboard.choose);
 
   Router.route("/hosts/login").get(isNotLoggedIn, hosts.login);
   Router.route("/hosts/login").post(
@@ -48,6 +51,9 @@ module.exports = function(passport, upload) {
   );
   Router.route("/hosts/logout").get(hosts.logout);
 
+  Router.route("/hosts/update/:id").post(isAuthenticatedAndIsHost, hosts.update);
+  // this should be last hosts route
+  Router.route("/hosts/:id").get(isAuthenticatedAndIsHost, hosts.show);
 
   Router.route('/clients/delete_all').get(clients.delete_all);
   Router.route('/clients/list_all').get(clients.list_all);
@@ -66,7 +72,7 @@ module.exports = function(passport, upload) {
     Router.route("/clients/logout").get(clients.logout);
 
 
-
+  Router.route("/signup/choose").get(isNotLoggedIn, dashboard.choose);
   Router.route("/").get(dashboard.home);
   // add wildcard Route to page_not_found
 

@@ -14,6 +14,7 @@ const Schema = mongoose.Schema;
 var clientSchema = new Schema({
   name: { type: String, required: true, unique: false },
   email: { type: String, required: true, unique: true },
+  user_type: {type: String, required: true, default: "client"},
   geo_location: {
     type: { type: String },
     coordinates: [Number],

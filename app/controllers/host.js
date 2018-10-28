@@ -32,8 +32,13 @@ exports.login = function(req, res){
 exports.signin = function(req, res){
   console.log(req.user);
   // req.flash('message', 'You are logged in!');
+  if(req.user && req.user.user_type && req.user.user_type == "host"){
+    res.redirect('/hosts/'+req.user._id);
+  }
+  else{
+    res.redirect('/map');
+  }
 
-  res.redirect('/');
 }
 
 exports.logout = function(req, res){
@@ -66,4 +71,39 @@ exports.create = function(req, res){
       //
     }
   });
+}
+
+exports.show = function(req, res){
+  console.log("show pag", req.params.id);
+  // req.flash('message', 'You are logged in!');
+  Host.findOne({_id: req.params.id}, function(err, host){
+    if(err || !host){
+      req.flash('error_message', 'Something went wrong ');
+       res.redirect('/');
+    }
+    else{
+      console.log("yoyoy");
+      res.render('./hosts/show', {host: host});
+    }
+  });
+
+}
+
+exports.update = function(req, res){
+  var new_data = {
+   spots: req.body.spots
+ }
+ // if(res.locals.current_user.is_admin && req.body.email != null){
+ //   new_data["email"] = req.body.email;
+ // }
+ Host.findOneAndUpdate({_id: req.params.id}, {$set: new_data}, function(err, host){
+   if(err || !host){
+     req.flash('error_message', 'Something went wrong ');
+      res.redirect('/');
+   }
+   else{
+     req.flash('success_message', "Account has been updated.");
+     res.redirect('/hosts/'+host._id);
+   }
+ });
 }

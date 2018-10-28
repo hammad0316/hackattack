@@ -26,6 +26,7 @@ const gmAPI = new GoogleMapsAPI(googleConfig);
 var hostSchema = new Schema({
   name: { type: String, required: true, unique: false },
   email: { type: String, required: true, unique: true },
+  user_type: {type: String, required: true, default: "host"},
   location: {
     line1: { type: String, required: true, unique: false },
     line2: {type: String, required: false},
@@ -40,8 +41,8 @@ var hostSchema = new Schema({
   password: {type: String, required: true},
   resetPasswordToken: String,
   resetPasswordExpires: Date,
-  spots: { type: Number, required: false, unique: false },
-  spots_available: { type: Number, required: false, unique: false },
+  spots: { type: Number, required: false, unique: false, default: 0 },
+  spots_available: { type: Number, required: false, unique: false, default: 0 },
   created_at: Date,
   updated_at: Date,
 });
