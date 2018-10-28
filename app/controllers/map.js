@@ -28,26 +28,43 @@ exports.home = function(req, res) {
 // };
 
 exports.find_hosts = function(req, res) {
-  const current_user_location = req.query.position;
-  Host.aggregate(
-    [
-      {
-        $geoNear: {
-          near: {
-            type: "Point",
-            coordinates: [
-              parseFloat(current_user_location.longitude),
-              parseFloat(current_user_location.latitude)
-            ]
-          },
-          distanceField: "distance",
-          spherical: true,
-          maxDistance: 1609
-        }
-      }
-    ],
-    function(err, hosts) {
-      res.send(hosts);
-    }
-  );
+  function waitForIndex() {
+    return new Promise((resolve, reject) => {
+      console.log("INDEX INFO ");
+      Host.on("index", error => (error ? reject(error) : resolve()));
+      console.log("END");
+    });
+  }
+
+  waitForIndex()
+    .then(
+      (function() {
+        console.log("TRO");
+        const current_user_location = req.query.position;
+        Host.aggregate(
+          [
+            {
+              $geoNear: {
+                near: {
+                  type: "Point",
+                  coordinates: [
+                    parseFloat(current_user_location.longitude),
+                    parseFloat(current_user_location.latitude)
+                  ]
+                },
+                distanceField: "distance",
+                spherical: true,
+                maxDistance: 1609
+              }
+            }
+          ],
+          function(err, hosts) {
+            res.send(hosts);
+          }
+        );
+      })()
+    )
+    .catch(error => {
+      console.log(error);
+    });
 };

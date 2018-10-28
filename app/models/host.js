@@ -44,8 +44,7 @@ var hostSchema = new Schema({
   created_at: Date,
   updated_at: Date
 });
-
-hostSchema.index({ geo_location: "2dsphere" }, { background: false });
+hostSchema.index({ geo_location: "2dsphere" });
 
 // on every save, add the date
 hostSchema.pre("save", true, function(next, done) {
@@ -207,6 +206,5 @@ hostSchema.methods.updatePassword = function(new_password, next) {
 // we need to create a model using it
 
 var Host = mongoose.model("Host", hostSchema);
-
 // make this available to our users in our Node applications
 module.exports = Host;
