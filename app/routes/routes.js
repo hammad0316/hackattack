@@ -13,12 +13,12 @@ const Router = express.Router();
 
 function isLoggedIn(req, res, next) {
   if (req.session.passport.user) return next();
-  else res.redirect("/users/login");
+  else res.redirect("/hosts/login");
 }
 //only for login. will log users out who try and go to login.
 function isNotLoggedIn(req, res, next) {
   if (!req.isAuthenticated()) return next();
-  else res.redirect("/users/logout");
+  else res.redirect("/hosts/logout");
 }
 var isAuthenticated = function(req, res, next) {
   if (req.isAuthenticated()) return next();
