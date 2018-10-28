@@ -36,6 +36,6 @@ process.on('SIGINT', function() {
 
 // BRING IN YOUR SCHEMAS & MODELS
 require('./host');
-// require('./child');
+require('./client');
 // require('./user');
 // require('./attendance');
