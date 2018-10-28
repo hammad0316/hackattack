@@ -21,6 +21,15 @@ const googleConfig = {
 
 const gmAPI = new GoogleMapsAPI(googleConfig);
 
+//make location a sub schema
+const locationSchema = new Schema(
+  {
+    type: { $type: String },
+    coordinates: { $type: Array }
+  },
+  { typeKey: "$type" }
+);
+
 // create a schema
 var hostSchema = new Schema({
   name: { type: String, required: true, unique: false },
@@ -34,8 +43,7 @@ var hostSchema = new Schema({
     zip_code: { type: String, required: false }
   },
   geo_location: {
-    type: { type: String },
-    coordinates: [Number]
+    $type: locationSchema
   },
   password: { type: String, required: true },
   resetPasswordToken: String,
@@ -116,6 +124,8 @@ hostSchema.post("save", function(doc) {
   };
 
   gmAPI.geocode(geocodeParams, function(err, data) {
+    console.log("hey");
+    console.log("status " + data.status);
     if (
       data &&
       data.results &&
@@ -124,13 +134,14 @@ hostSchema.post("save", function(doc) {
       data.results[0].geometry.location
     ) {
       const geo = data.results[0].geometry.location;
+      console.log("RESULT", data.results[0]);
       if (
         !doc.geo_location.coordinates ||
         doc.geo_location.coordinates.length == 0
       ) {
         doc.geo_location = {
-          coordinates: [geo.lng, geo.lat],
-          type: "Point"
+          type: "Point",
+          coordinates: [geo.lng, geo.lat]
         };
         doc.save();
       }
