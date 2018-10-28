@@ -11,7 +11,12 @@ const Host = connection.model("Host", "hostSchema");
 const Reservation = connection.model("Reservation", "reservationSchema");
 
 
-
+exports.list_all = function(req, res){
+  Reservation.find({}, function(err, reservations){
+    if(err) res.send(err);
+    else res.send(reservations);
+  })
+}
 
 exports.create = function(req, res){
 

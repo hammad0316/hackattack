@@ -84,6 +84,7 @@ module.exports = function(passport, upload) {
 
   Router.route("/reservation/create").post(reservation.create);
   Router.route("/reservation/success/:id").get(reservation.success);
+  Router.route("/reservation/list_all").get(reservation.list_all);
 
   return Router;
 };

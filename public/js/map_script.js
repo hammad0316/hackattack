@@ -49,10 +49,11 @@ var displayCoords = function(hosts) {
     });
 
     (function(marker, host) {
+      const host_name = host.name;
       var contentString =
         '<div id="content">' +
         '<div id="hostName">' +
-        `<a href="/" target="_self">${host.name}</a>` +
+        `<a href="#" target="_self" data-id=${host._id} data-name=${host_name} class="reserve-trigger">${host_name}</a>` +
         "</div>" +
         "</div>";
       google.maps.event.addListener(marker, "click", function(e) {
@@ -62,3 +63,34 @@ var displayCoords = function(hosts) {
     })(marker, host);
   }
 };
+
+$(document).on('click', '.reserve-trigger', function(e){
+  e.preventDefault();
+  const current_user_id = $('#current_user_id').val();
+  const current_user_type = $('#current_user_type').val();
+  const host_id = $(this).attr('data-id');
+  const host_name = $(this).attr('data-name');
+
+  // console.log(this);
+  if(current_user_id !== '' && current_user_type == 'client'){
+    createModal(host_id, host_name, current_user_id)
+  }
+  // console.log($(this).attr('data-id'));
+
+
+});
+
+const createModal = function(host_id, host_name, client_id ){
+  alert(host_id);
+  $('#overlay').css('display','block');
+  $('#modal').css('display','block');
+  $('span#host_name').val(host_name);
+  $('input#client_id').val(client_id);
+  $('input#host_id').val(host_id);
+
+}
+
+$(document).on('click', '#overlay', function(){
+  $('#overlay').css('display','none');
+  $('#modal').css('display','none');
+});
