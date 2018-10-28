@@ -636,6 +636,7 @@ body {
 #main-header {
   color: #4062bb;
   text-align: center;
+  padding-top: 50px
 }
 
 .start-now {
@@ -649,4 +650,14 @@ body {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
+}
+#section1img {
+  width: 85%;
+  height: auto;
+  padding: 50px 7.5%;
+}
+#section2img {
+  width: 75%;
+  height: auto;
+  padding: 50px 12.5%;
 }
