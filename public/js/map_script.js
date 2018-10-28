@@ -8,8 +8,8 @@ window.onload = function() {
       latitude: position.coords.latitude
     };
 
-    document.getElementById("startLat").innerHTML = position.coords.latitude;
-    document.getElementById("startLon").innerHTML = position.coords.longitude;
+    // document.getElementById("startLat").innerHTML = position.coords.latitude;
+    // document.getElementById("startLon").innerHTML = position.coords.longitude;
     infoWindow = new google.maps.InfoWindow();
     var center = new google.maps.LatLng(
       position.coords.latitude,
