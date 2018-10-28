@@ -6,6 +6,10 @@ exports.home = function(req, res) {
 
 exports.test = function(req, res) {
   //message = req.flash('message');
-  var message = { hello: "world" };
+  var message = [
+    { id: 1, latitude: 40.708184, longitude: -73.827116 },
+    { id: 2, latitude: 40.708716, longitude: -73.827652 },
+    { id: 3, latitude: 40.708211, longitude: -73.826721 }
+  ];
   res.send(message);
 };

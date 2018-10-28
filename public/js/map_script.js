@@ -31,6 +31,9 @@ var getHosts = function(LngLatPair) {
       // console.log(data.length);
       // console.log(data.children.length);
       console.log(data);
+      displayCoords(data);
     }
   });
 };
+
+var displayCoords = function(data) {};
