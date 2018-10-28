@@ -30,6 +30,7 @@ var isAdmin = function(req, res, next) {
 
 module.exports = function(passport, upload) {
   Router.route('/hosts/delete_all').get(hosts.delete_all);
+  Router.route("/hosts/list_all").get(hosts.list_all);
 
   Router.route("/hosts/signup").get(isNotLoggedIn, hosts.signup);
   Router.route("/hosts/signup").post(isNotLoggedIn, hosts.create);
@@ -47,6 +48,9 @@ module.exports = function(passport, upload) {
   );
   Router.route("/hosts/logout").get(hosts.logout);
 
+
+  Router.route('/clients/delete_all').get(clients.delete_all);
+  Router.route('/clients/list_all').get(clients.list_all);
   Router.route("/clients/signup").get(isNotLoggedIn, clients.signup);
   Router.route("/clients/signup").post(isNotLoggedIn, clients.create);
 
@@ -54,10 +58,10 @@ module.exports = function(passport, upload) {
   Router.route("/clients/login").post(
     isNotLoggedIn,
     passport.authenticate("login", {
-      failureRedirect: "/hosts/login",
+      failureRedirect: "/clients/login",
       failureFlash: true
     }),
-    hosts.signin
+    clients.signin
   );
     Router.route("/clients/logout").get(clients.logout);
 
