@@ -2,6 +2,7 @@ const hosts = require("../controllers/host.js");
 const clients = require("../controllers/client.js");
 // const events = require('../controllers/event.js');
 const dashboard = require("../controllers/dashboard.js");
+const reservation = require("../controllers/reservation.js");
 const map = require("../controllers/map.js");
 // const open_gym = require('../controllers/open_gym.js');
 // const spreadsheets = require('../controllers/spreadsheets.js');
@@ -52,7 +53,7 @@ module.exports = function(passport, upload) {
   Router.route("/hosts/logout").get(hosts.logout);
 
   Router.route("/hosts/update/:id").post(isAuthenticatedAndIsHost, hosts.update);
-  
+
   // this should be last hosts route
   Router.route("/hosts/:id").get(isAuthenticatedAndIsHost, hosts.show);
 
@@ -80,6 +81,9 @@ module.exports = function(passport, upload) {
   Router.route("/map").get(map.home);
   Router.route("/map/find_hosts").get(map.find_hosts);
 
+
+  Router.route("/reservation/create").post(reservation.create);
+  Router.route("/reservation/success/:id").get(reservation.success);
 
   return Router;
 };
