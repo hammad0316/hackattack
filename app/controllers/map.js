@@ -16,13 +16,38 @@ exports.home = function(req, res) {
   res.render("./map/map", { GMAP_API_KEY: GMAP_API_KEY });
 };
 
+// exports.find_hosts = function(req, res) {
+//   const current_user_location = req.body.location;
+//   Host.find({}, { name: 1, _id: 1, "geo_location.coordinates": 1 }, function(
+//     err,
+//     hosts
+//   ) {
+//     res.send(hosts);
+//     // res.send({hosts: hosts});
+//   });
+// };
+
 exports.find_hosts = function(req, res) {
-  const current_user_location = req.body.location;
-  Host.find({}, { name: 1, _id: 1, "geo_location.coordinates": 1 }, function(
-    err,
-    hosts
-  ) {
-    res.send(hosts);
-    // res.send({hosts: hosts});
-  });
+  const current_user_location = req.query.position;
+  Host.aggregate(
+    [
+      {
+        $geoNear: {
+          near: {
+            type: "Point",
+            coordinates: [
+              parseFloat(current_user_location.longitude),
+              parseFloat(current_user_location.latitude)
+            ]
+          },
+          distanceField: "distance",
+          spherical: true,
+          maxDistance: 1609
+        }
+      }
+    ],
+    function(err, hosts) {
+      res.send(hosts);
+    }
+  );
 };
