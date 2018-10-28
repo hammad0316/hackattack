@@ -26,6 +26,7 @@ const gmAPI = new GoogleMapsAPI(googleConfig);
 var hostSchema = new Schema({
   name: { type: String, required: true, unique: false },
   email: { type: String, required: true, unique: true },
+  user_type: {type: String, required: true, unique: true},
   location: {
     line1: { type: String, required: true, unique: false },
     line2: {type: String, required: false},

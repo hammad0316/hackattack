@@ -14,6 +14,7 @@ const path = require('path');
 const env = process.env.NODE_ENV || 'dev';
 
 const mongoose = require( 'mongoose' );
+seedDB = require("./seeds");
     // User = mongoose.model('User', 'userSchema');
 app.use(logger('dev'));
 
@@ -63,6 +64,9 @@ app.use(function(req, res, next){
 
 
 app.locals.formatDate = dateFns.format;
+
+//init SEEDS!!
+seedDB();
 
 const initPassport = require('./passport/init');
 initPassport(passport);
