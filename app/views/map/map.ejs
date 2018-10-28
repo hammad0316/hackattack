@@ -35,10 +35,11 @@
     <div id="modal" style="display:none">
       <div class="modal-content">
         <form class="" action="/reservation/create" method="post">
-          <h2>Would you like to reserve this spot?<span id="host_name"></span></h2>
+          <!-- <h2>Would you like to reserve this spot?<span id="host_name"></span></h2> -->
+          <img id="section1img" src="/images/reserve.png" />
           <input type="hidden" name="client_id" id="client_id">
           <input type="hidden" name="host_id" id="host_id">
-          <input type="submit" class="start-now" value="Yes">
+          <input type="submit" id="reserve-button" value="Yes">
         </form>
       </div>
     </div>
