@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const  bcrypt = require('bcrypt');
-const   SALT_WORK_FACTOR = 10;
+const  SALT_WORK_FACTOR = 10;
+const GoogleMapsAPI = require('googlemaps');
 
 // const Child = mongoose.model('Child', 'childSchema');
 // const Event = mongoose.model('Event', 'eventSchema');
@@ -9,6 +10,17 @@ const salt = bcrypt.genSaltSync(10);
 const fs = require('fs');
 // grab the things we need
 const Schema = mongoose.Schema;
+// const GMAP_API_KEY = process.env.HACKAMAP;
+const GMAP_API_KEY='AIzaSyCRbTrmeEaEQpAuRyG9YmwBLiJwmPjrulU';
+const googleConfig = {
+  key: GMAP_API_KEY,
+  stagger_time:       1000, // for elevationPath
+  encode_polylines:   false,
+  secure:             true, // use https
+};
+
+const gmAPI = new GoogleMapsAPI(googleConfig);
+
 
 // create a schema
 var hostSchema = new Schema({
@@ -38,10 +50,9 @@ var hostSchema = new Schema({
 // on every save, add the date
 hostSchema.pre('save', true, function(next, done) {
   var host = this;
-  console.log(host);
+  // console.log(host);
   var currentDate = new Date();
   this.updated_at = currentDate;
-
 
   // if created_at doesn't exist, add to that field
   if (!this.created_at)
@@ -52,7 +63,9 @@ hostSchema.pre('save', true, function(next, done) {
   if(!email_regex.test(this.email)){
     var err = new Error('Incorrect Email Format');
     next(err);
+
   }
+
 
   // var phone_regex =/((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/
   // if(!phone_regex.test(this.phone_number)){
@@ -73,9 +86,42 @@ hostSchema.pre('save', true, function(next, done) {
         host.password = hash;
         next();
     });
-    console.log("got here");
     done();
 });
+
+
+
+hostSchema.post('save', function(doc) {
+
+  var host = doc;
+  const location = doc.location;
+  const full_address = location.line1  + " "+ (location.line2 || "") + " " + (location.city || "") + "," +" " +(location.state || "") +" "+ (location.zip_code || "");
+
+  const zip_code = doc.location && doc.location.zip_code? ',postal_code:'+doc.location.zip_code : '';
+  var geocodeParams = {
+    "address":    full_address,
+    "components": "components=country:US",
+  };
+
+  gmAPI.geocode(geocodeParams, function(err, data){
+    if(data && data.results && data.results[0] && data.results[0].geometry && data.results[0].geometry.location ){
+      const geo = data.results[0].geometry.location ;
+      if(!doc.geo_location.coordinates || doc.geo_location.coordinates.length == 0  ){
+        doc.geo_location = {
+          coordinates: [geo.lng, geo.lat],
+          type: "Point",
+        }
+        doc.save();
+      }
+    }
+
+  });
+});
+
+
+hostSchema.methods.updateGeoLocation = function(doc){
+
+}
 
 
 
@@ -85,12 +131,7 @@ hostSchema.pre('save', true, function(next, done) {
 
 // METHODS
 
-hostSchema.methods.full_name = function(){
-  return this.firstname + " " + this.lastname;
-}
-hostSchema.methods.initials = function(){
-  return this.firstname.charAt(0) +" " + this.lastname.charAt(0);
-}
+
 // hostSchema.methods.full_address = function(){
 //   return this.address +" "+ this.city +" NY, "+ this.zip_code;
 // }
