@@ -52,7 +52,7 @@ var displayCoords = function(hosts) {
       var contentString =
         '<div id="content">' +
         '<div id="hostName">' +
-        `<a href="localhost:3000/host?id=1">${host.name}</a>` +
+        `<a href="/" target="_self">${host.name}</a>` +
         "</div>" +
         "</div>";
       google.maps.event.addListener(marker, "click", function(e) {
