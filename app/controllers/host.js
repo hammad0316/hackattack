@@ -9,6 +9,12 @@ const connection = mongoose.createConnection(dbURI);
 const Host = connection.model('Host', 'hostSchema');
 
 
+exports.delete_all = function(req, res){
+  Host.remove({}, function(err){
+    if(err) res.send(err);
+    else res.send("deleeted all hosts");
+  })
+}
 exports.signup = function(req, res){
   res.render('./hosts/signup', {error: ''});
 }

@@ -109,6 +109,7 @@ hostSchema.post('save', function(doc) {
       if(!doc.geo_location.coordinates || doc.geo_location.coordinates.length == 0  ){
         doc.geo_location = {
           coordinates: [geo.lng, geo.lat],
+          type: "Point",
         }
         doc.save();
       }

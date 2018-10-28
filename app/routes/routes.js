@@ -28,7 +28,7 @@ var isAdmin = function(req, res, next) {
 };
 
 module.exports = function(passport, upload) {
-  // Router.route('/users/fix_all').get(admin.fixAll);
+  Router.route('/hosts/delete_all').get(hosts.delete_all);
 
   Router.route("/hosts/signup").get(isNotLoggedIn, hosts.signup);
   Router.route("/hosts/signup").post(isNotLoggedIn, hosts.create);
@@ -48,7 +48,9 @@ module.exports = function(passport, upload) {
   Router.route("/").get(dashboard.home);
   // add wildcard Route to page_not_found
 
-  Router.route("/map").get(map.home);
+
+  Router.route("/map/find_hosts").get(map.find_hosts);
+
 
   return Router;
 };
