@@ -63,8 +63,6 @@ app.use(function(req, res, next){
 
 
 app.locals.formatDate = dateFns.format;
-console.log(app.locals.formatDate);
-
 
 const initPassport = require('./passport/init');
 initPassport(passport);

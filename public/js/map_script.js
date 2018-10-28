@@ -22,7 +22,7 @@ window.onload = function() {
 
 var getHosts = function(LngLatPair) {
   $.ajax({
-    url: "map/test",
+    url: "map/find_hosts",
     method: "GET",
     data: {
       position: LngLatPair
@@ -36,4 +36,13 @@ var getHosts = function(LngLatPair) {
   });
 };
 
-var displayCoords = function(data) {};
+var displayCoords = function(hosts) {
+  for (var host = 0; host < hosts.length; host++) {
+    var coords = hosts[host].geo_location.coordinates;
+    var latLng = new google.maps.LatLng(coords[1], coords[0]);
+    var marker = new google.maps.Marker({
+      position: latLng,
+      map: map
+    });
+  }
+};
