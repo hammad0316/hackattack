@@ -1,3 +1,5 @@
+var infoWindow;
+
 window.onload = function() {
   var startPos;
   var geoSuccess = function(position) {
@@ -8,7 +10,7 @@ window.onload = function() {
 
     document.getElementById("startLat").innerHTML = position.coords.latitude;
     document.getElementById("startLon").innerHTML = position.coords.longitude;
-
+    infoWindow = new google.maps.InfoWindow();
     var center = new google.maps.LatLng(
       position.coords.latitude,
       position.coords.longitude
@@ -45,20 +47,18 @@ var displayCoords = function(hosts) {
       position: latLng,
       map: map
     });
-    marker.addListener("click", function() {
+
+    (function(marker, host) {
       var contentString =
         '<div id="content">' +
         '<div id="hostName">' +
         `<a href="localhost:3000/host?id=1">${host.name}</a>` +
         "</div>" +
         "</div>";
-
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString
+      google.maps.event.addListener(marker, "click", function(e) {
+        infoWindow.setContent(contentString);
+        infoWindow.open(map, marker);
       });
-      infowindow.open(map, marker);
-    });
+    })(marker, host);
   }
 };
-
-var showInfo = function(marker, host) {};
