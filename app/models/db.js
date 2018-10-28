@@ -37,5 +37,6 @@ process.on('SIGINT', function() {
 // BRING IN YOUR SCHEMAS & MODELS
 require('./host');
 require('./client');
+require('./reservation');
 // require('./user');
 // require('./attendance');
