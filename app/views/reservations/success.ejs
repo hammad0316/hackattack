@@ -9,14 +9,15 @@
   <body class="church-background">
     <% include ../layouts/header %>
     <% include ../layouts/message %>
-    <div class="main-container">
-
+    <div class="main-container" style="text-align:center">
         <h1>Congrats!</h1>
         <h3>You Reserved a spot!</h3>
 
-        <p>with: <%=host.name%>
+        <p>with: <%=host.name%></p>
 
-          <p> Your confirmation code is :<%=reservation._id%> </p> 
+          <img src="/images/success.png" width=100px/>
+
+          <p> Your confirmation code is :<%=reservation._id%> </p>
 
           <form>
 <input type="button" value="Homepage" onclick="window.location.href='/'" />
