@@ -8,8 +8,8 @@ window.onload = function() {
       latitude: position.coords.latitude
     };
 
-    document.getElementById("startLat").innerHTML = position.coords.latitude;
-    document.getElementById("startLon").innerHTML = position.coords.longitude;
+    // document.getElementById("startLat").innerHTML = position.coords.latitude;
+    // document.getElementById("startLon").innerHTML = position.coords.longitude;
     infoWindow = new google.maps.InfoWindow();
     var center = new google.maps.LatLng(
       position.coords.latitude,
@@ -81,7 +81,6 @@ $(document).on('click', '.reserve-trigger', function(e){
 });
 
 const createModal = function(host_id, host_name, client_id ){
-  alert(host_id);
   $('#overlay').css('display','block');
   $('#modal').css('display','block');
   $('span#host_name').val(host_name);

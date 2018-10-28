@@ -6,9 +6,10 @@
     <style>
       /* Set the size of the div element that contains the map */
       #map {
-        height: 400px;  /* The height is 400 pixels */
+        height: calc(100vh - 83px);  /* The height is 400 pixels */
         width: 100%;  /* The width is the width of the web page */
        }
+
     </style>
     <script>
     var map;
@@ -16,21 +17,25 @@
 <script src="/js/jquery-3.1.1.min.js" charset="utf-8"></script>
   </head>
   <body>
+    <% include ../layouts/header %>
+    <% include ../layouts/message %>
+    <div class="main-container" style="margin-top:0px;padding-bottom:0px">
     <% if(current_user){  %>
       <input type="hidden" name="current_user_id" value="<%= current_user._id %>" id="current_user_id">
       <input type="hidden" name="current_user_type" value="<%= current_user.user_type %>" id="current_user_type">
     <% }%>
-
-    <h3>My Google Maps Demo</h3>
+    <p id="startLat" style="display:hidden;"></p>
+    <p id="startLon" style="display:hidden;"></p>
+    <!-- <h3>My Google Maps Demo</h3>
     <p id="startLat"></p>
-    <p id="startLon"></p>
+    <p id="startLon"></p> -->
     <!--The div element for the map -->
     <div id="map"></div>
     <div id="overlay" style="display:none"></div>
     <div id="modal" style="display:none">
       <div class="modal-content">
         <form class="" action="/reservation/create" method="post">
-          <h1>Would you like to Reserve this spot?<span id="host_name"></span></h1>
+          <h2>Would you like to Reserve this spot?<span id="host_name"></span></h2>
           <input type="hidden" name="client_id" id="client_id">
           <input type="hidden" name="host_id" id="host_id">
           <input type="submit" value="Yes">
@@ -38,20 +43,21 @@
       </div>
     </div>
     <script>
-// Initialize and add the map
-function initMap() {
-  // The location of Uluru
-  var uluru = {lat: -25.344, lng: 131.036};
-  // The map, centered at Uluru
-  map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
-}
+        // Initialize and add the map
+        function initMap() {
+          // The location of Uluru
+          var uluru = {lat: -25.344, lng: 131.036};
+          // The map, centered at Uluru
+          map = new google.maps.Map(
+              document.getElementById('map'), {zoom: 4, center: uluru});
+          // The marker, positioned at Uluru
+          var marker = new google.maps.Marker({position: uluru, map: map});
+        }
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=<%=GMAP_API_KEY%>&callback=initMap">
     </script>
     <script src="/js/map_script.js" charset="utf-8"></script>
+  </div>
   </body>
 </html>
