@@ -15,6 +15,14 @@ exports.delete_all = function(req, res){
     else res.send("deleeted all clients");
   })
 }
+
+exports.list_all = function(req, res){
+  Client.find({}, function(err, clients){
+    if(err) res.send(err);
+    else res.send(clients);
+  })
+}
+
 exports.signup = function(req, res){
   res.render('./clients/signup', {error: ''});
 }
@@ -25,7 +33,7 @@ exports.login = function(req, res){
 
 exports.signin = function(req, res){
   // req.flash('message', 'You are logged in!');
-  res.redirect('/clients/'+req.client._id);
+  res.redirect('/');
 }
 
 exports.logout = function(req, res){
@@ -49,6 +57,7 @@ exports.create = function(req, res){
     else {
       req.login(client, function (err) {
                if ( ! err ){
+                 console.log(client);
                    req.flash('success_message', 'Successfully registered');
                    res.redirect('/');
                } else {

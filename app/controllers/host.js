@@ -15,6 +15,12 @@ exports.delete_all = function(req, res){
     else res.send("deleeted all hosts");
   })
 }
+exports.list_all = function(req, res){
+  Host.find({}, function(err, hosts){
+    if(err) res.send(err);
+    else res.send(hosts);
+  })
+}
 exports.signup = function(req, res){
   res.render('./hosts/signup', {error: ''});
 }
@@ -24,9 +30,10 @@ exports.login = function(req, res){
 }
 
 exports.signin = function(req, res){
+  console.log(req.user);
   // req.flash('message', 'You are logged in!');
 
-  res.redirect('/hosts/'+req.host._id);
+  res.redirect('/');
 }
 
 exports.logout = function(req, res){
@@ -35,7 +42,6 @@ exports.logout = function(req, res){
 }
 
 exports.create = function(req, res){
-  console.log("trying to craete an account");
   req.body.email = req.body.email.toLowerCase();
   // req.body.address = req.body.address +" " +req.body.city+", NY";
 
@@ -49,7 +55,7 @@ exports.create = function(req, res){
     }
     else {
       req.login(host, function (err) {
-               if ( ! err ){
+               if ( !err ){
                    req.flash('success_message', 'Successfully registered');
                    res.redirect('/');
                } else {
