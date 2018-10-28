@@ -52,6 +52,7 @@ module.exports = function(passport, upload) {
   Router.route("/hosts/logout").get(hosts.logout);
 
   Router.route("/hosts/update/:id").post(isAuthenticatedAndIsHost, hosts.update);
+  
   // this should be last hosts route
   Router.route("/hosts/:id").get(isAuthenticatedAndIsHost, hosts.show);
 
