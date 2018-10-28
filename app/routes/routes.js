@@ -48,11 +48,9 @@ module.exports = function(passport, upload) {
   Router.route("/").get(dashboard.home);
   // add wildcard Route to page_not_found
 
-
+  Router.route("/map").get(map.home);
   Router.route("/map/find_hosts").get(map.find_hosts);
 
-
-  Router.route("/map/test").get(map.test);
 
   return Router;
 };
