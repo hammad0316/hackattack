@@ -28,6 +28,11 @@ var isAuthenticatedAndIsHost = function(req, res, next) {
   if (req.isAuthenticated() && req.user && req.user.user_type && req.user.user_type == "host") return next();
   res.redirect("/");
 };
+var isAuthenticatedAndIsClient = function(req, res, next) {
+  if (req.isAuthenticated() && req.user && req.user.user_type && req.user.user_type == "client") return next();
+  req.flash('error_message', 'You must be logged in as a client to search ');
+  res.redirect("/clients/login");
+};
 var isAdmin = function(req, res, next) {
   if (req.isAuthenticated() && req.user.status == "admin") return next();
   res.redirect("/");
@@ -78,7 +83,7 @@ module.exports = function(passport, upload) {
   Router.route("/").get(dashboard.home);
   // add wildcard Route to page_not_found
 
-  Router.route("/map").get(map.home);
+  Router.route("/map").get(isAuthenticatedAndIsClient, map.home);
   Router.route("/map/find_hosts").get(map.find_hosts);
 
 
