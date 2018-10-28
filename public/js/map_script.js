@@ -81,7 +81,6 @@ $(document).on('click', '.reserve-trigger', function(e){
 });
 
 const createModal = function(host_id, host_name, client_id ){
-  alert(host_id);
   $('#overlay').css('display','block');
   $('#modal').css('display','block');
   $('span#host_name').val(host_name);
